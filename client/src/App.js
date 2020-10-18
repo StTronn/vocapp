@@ -1,10 +1,19 @@
 import React from "react";
+import SetViewerWrapper from "./components/SetViewer";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import DeckViewerWrapper from "./components/DeckViewer";
+import Card from "./components/Card";
 import "./App.css";
 
 const data = [
   {
     id: 1,
-    name: "vocabGRE",
+    name: "Gre Vocab 500",
+    tag: "Vocabulary",
+    info: "Top 500 words occuring in GRE",
+    decksCount: 10,
+    CardsCount: 500,
+    progress: 75,
     decks: [
       {
         id: 1,
@@ -27,11 +36,21 @@ const data = [
 
 function App() {
   return (
-    <div className="App">
-      {data.map((item, id) => (
-        <div> {item.name} </div>
-      ))}
-    </div>
+    <Router>
+      <div className=" mx-4  lg:mx-16">
+        <Switch>
+          <Route path="/setviewer">
+            <SetViewerWrapper />
+          </Route>
+          <Route path="/set">
+            <DeckViewerWrapper />
+          </Route>
+          <Route path="/">
+            <Card />
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
