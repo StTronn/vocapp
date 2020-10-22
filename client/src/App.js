@@ -3,6 +3,7 @@ import SetViewerWrapper from "./components/SetViewer";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import DeckViewerWrapper from "./components/DeckViewer";
 import Card from "./components/Card";
+import Deck from "./components/Deck";
 import "./App.css";
 
 const data = [
@@ -18,8 +19,9 @@ const data = [
       {
         id: 1,
         name: "Common 1",
-        learned: 26,
+        Learned: 26,
         New: 26,
+        total: 52,
         Starred: 0,
         cards: [
           { front: "stren", back: "strict in lifestyle and nature" },
@@ -30,9 +32,10 @@ const data = [
       {
         id: 2,
         name: "Common 2",
-        learned: 26,
+        Learned: 26,
         New: 26,
         Starred: 0,
+        total: 52,
         cards: [
           { front: "stren", back: "strict in lifestyle and nature" },
           { front: "etheral", back: "Delicate in touch, out of this world" },
@@ -53,11 +56,10 @@ function App() {
           <Route path="/set">
             <DeckViewerWrapper />
           </Route>
-
-          <Route path="/card">
-            <Card />
+          <Route exact path="/deck">
+            <Deck />
           </Route>
-          <Route path="/">
+          <Route exact path="/">
             <Card />
           </Route>
         </Switch>

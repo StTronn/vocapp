@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import Spinner from "react-spinkit";
 import styled from "styled-components";
 import Progress from "./Progress";
+import { Set } from "../context/SetContext";
 
 const Cointainer = styled.div`
   display: grid;
@@ -12,10 +14,12 @@ const Cointainer = styled.div`
 // fetch decks list for current set
 const decks = [
   {
+    setId: 1,
     id: 1,
     name: "Common 1",
-    learned: 26,
+    learned: 20,
     New: 26,
+    total: 52,
     starred: 0,
     cards: [
       { front: "stren", back: "strict in lifestyle and nature" },
@@ -24,10 +28,12 @@ const decks = [
   },
 
   {
+    setId: 1,
     id: 2,
     name: "Common 2",
     learned: 26,
     New: 26,
+    total: 52,
     starred: 0,
     cards: [
       { front: "stren", back: "strict in lifestyle and nature" },
@@ -37,9 +43,15 @@ const decks = [
 ];
 
 const DeckViewerWrapper = () => {
+  const { state, dispatch } = useContext(Set);
+  useEffect(() => {
+    dispatch({ type: "UPDATE_SET", payload: decks });
+  }, []);
+
+  if (!state) return <Spinner name="folding-cube" color="teal" />;
   return (
     <Cointainer className="grid-cols-1 lg:grid-cols-4">
-      {decks.map((e) => (
+      {state.map((e) => (
         <DeckViewer deck={e} key={e.id} />
       ))}
     </Cointainer>
@@ -47,12 +59,16 @@ const DeckViewerWrapper = () => {
 };
 
 const DeckViewer = ({ deck }) => {
-  const { name, learned, New, starred } = deck;
+  const { id, setId, name, learned, New, starred, total } = deck;
   const history = useHistory();
   return (
     <div
       onClick={() => {
-        history.push("/card");
+        history.push({
+          pathname: `/deck`,
+          search: `?setId=${setId}&id=${id}`,
+          state: deck,
+        });
       }}
       className="bg-white cursor-pointer rounded  p-4 shadow"
     >
@@ -88,7 +104,7 @@ const DeckViewer = ({ deck }) => {
           </div>
         </div>
       </div>
-      <Progress progress={50} />
+      <Progress progress={Math.ceil((learned / total) * 100)} />
     </div>
   );
 };
