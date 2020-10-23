@@ -50,10 +50,10 @@ const BackButton = ({ setShowFront, showFront }) => (
     }}
     className="grid cursor-pointer  grid-cols-2  text-white text-center h-16"
   >
-    <div className="grid items-center bg-green-600 h-full rounded-l ">
+    <div className="grid items-center bg-green-600 h-full rounded-bl ">
       I knew this
     </div>
-    <div className="grid items-center bg-blue-600 h-full rounded-r">
+    <div className="grid items-center bg-blue-600 h-full rounded-br">
       I didn't knew this
     </div>
   </div>
