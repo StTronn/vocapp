@@ -5,9 +5,14 @@ import React, { useState } from "react";
  * front
  * back
  */
-const Card = ({ card }) => {
+const Card = ({ card, nextCard }) => {
   const { front, back } = card;
   const [showFront, setShowFront] = useState(true);
+  const update = (choice) => {
+    card.update(choice);
+    setShowFront(!showFront);
+    nextCard();
+  };
   return (
     <>
       <div className=" bg-white rounded   shadow">
@@ -24,7 +29,11 @@ const Card = ({ card }) => {
         )}
 
         {!showFront && (
-          <BackButton setShowFront={setShowFront} showFront={showFront} />
+          <BackButton
+            update={update}
+            setShowFront={setShowFront}
+            showFront={showFront}
+          />
         )}
       </div>
     </>
@@ -43,17 +52,22 @@ const FrontButton = ({ showFront, setShowFront }) => (
   </div>
 );
 
-const BackButton = ({ setShowFront, showFront }) => (
-  <div
-    onClick={() => {
-      setShowFront(!showFront);
-    }}
-    className="grid cursor-pointer  grid-cols-2  text-white text-center h-16"
-  >
-    <div className="grid items-center bg-green-600 h-full rounded-bl ">
+const BackButton = ({ update, setShowFront, showFront }) => (
+  <div className="grid cursor-pointer  grid-cols-2  text-white text-center h-16">
+    <div
+      onClick={() => {
+        update(1);
+      }}
+      className="grid items-center bg-green-600 h-full rounded-bl "
+    >
       I knew this
     </div>
-    <div className="grid items-center bg-blue-600 h-full rounded-br">
+    <div
+      onClick={() => {
+        update(0);
+      }}
+      className="grid items-center bg-blue-600 h-full rounded-br"
+    >
       I didn't knew this
     </div>
   </div>

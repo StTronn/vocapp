@@ -18,11 +18,14 @@ const decks = [
     id: 1,
     name: "Common 1",
     learned: 20,
-    New: 26,
+    New: 20,
     total: 52,
     starred: 0,
     cards: [
-      { front: "stren", back: "strict in lifestyle and nature" },
+      {
+        front: "Hello",
+        back: "strict in lifestyle and nature",
+      },
       { front: "etheral", back: "Delicate in touch, out of this world" },
     ],
   },

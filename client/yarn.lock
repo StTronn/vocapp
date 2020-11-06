@@ -6843,6 +6843,13 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
+lt-spaced-repetition-js@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/lt-spaced-repetition-js/-/lt-spaced-repetition-js-1.0.2.tgz#375345f8ddbf146548a6e7d179e035f07af84323"
+  integrity sha512-AQG4530sU1LUZhwChfmch/E2Ce8MIL0hyunxOzDarLd2kNXcGRZAPL16omG4ddjIXv06PjAhTgJ9llveGgnB0w==
+  dependencies:
+    lodash "^4.17.20"
+
 make-dir@^2.0.0, make-dir@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/make-dir/-/make-dir-2.1.0.tgz#5f0310e18b8be898cc07009295a30ae41e91e6f5"
