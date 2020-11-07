@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import _ from "lodash";
-import { createCards, Deck } from "../leitner";
+import { createCards, Deck, statEn } from "../leitner";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Progress from "./Progress";
@@ -15,17 +15,21 @@ const DeckComponent = () => {
   const location = useLocation();
   const deck = location.state;
 
-  const { learned, New, total } = deck;
   const d = new Deck(createCards(deck.cards));
   const cardsRef = useRef(d);
   const cards = cardsRef.current;
+
+  const learned = cards.countType(statEn.MASTERED);
+  const New = cards.countType(statEn.NEW);
+  const review = cards.countType(statEn.REVIEW) + cards.countType(statEn.WRONG);
+  const total = cards.cards.length;
   const [currentCard, setCurrentCard] = useState(cards.pick());
 
   const nextCard = () => {
     setCurrentCard(cards.pick());
   };
 
-  console.log(cards);
+  console.log(cards, New);
   if (!deck) return <div>Something went wrong</div>;
 
   return (
@@ -38,11 +42,7 @@ const DeckComponent = () => {
       </div>
 
       <div>
-        <Progress
-          done={total - learned - New}
-          context="Reviewing"
-          total={total}
-        />
+        <Progress done={review} context="Reviewing" total={total} />
       </div>
 
       <div>
