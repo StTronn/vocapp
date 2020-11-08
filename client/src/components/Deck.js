@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useContext } from "react";
+import { Set } from "../context/SetContext";
 import _ from "lodash";
 import { createCards, Deck, statEn } from "../leitner";
 import { useLocation } from "react-router-dom";
@@ -12,28 +13,27 @@ const Cointainer = styled.div`
 `;
 
 const DeckComponent = () => {
+  const { state, dispatch } = useContext(Set);
   const location = useLocation();
   const data = location.state;
   data.cards = createCards(data.cards);
   const d = new Deck(data);
-  const cardsRef = useRef(d);
-  let cards = cardsRef.current;
-
+  const deckRef = useRef(d);
+  let deck = deckRef.current;
   //metadata
-  const review = cards.countType(statEn.REVIEW) + cards.countType(statEn.WRONG);
-  let [learned, setLearned] = useState(cards.countType(statEn.MASTERED));
-  let [New, setNew] = useState(cards.countType(statEn.NEW));
-  let [total, setTotal] = useState(cards.cards.length);
+  const review = deck.countType(statEn.REVIEW) + deck.countType(statEn.WRONG);
+  let [learned, setLearned] = useState(deck.countType(statEn.MASTERED));
+  let [New, setNew] = useState(deck.countType(statEn.NEW));
+  const total = deck.cards.length;
 
-  const [currentCard, setCurrentCard] = useState(cards.cards[0]);
+  const [currentCard, setCurrentCard] = useState(deck.cards[0]);
 
   const nextCard = () => {
-    cards = cardsRef.current;
-    console.log(cards);
-    setLearned(cards.countType(statEn.MASTERED));
-    setNew(cards.countType(statEn.NEW));
-
-    setCurrentCard(cards.pick());
+    deck = deckRef.current;
+    dispatch({ type: "UPDATE_DECK", payload: {[deck.id]:deck} });
+    setLearned(deck.countType(statEn.MASTERED));
+    setNew(deck.countType(statEn.NEW));
+    setCurrentCard(deck.pick());
   };
 
   if (!data) return <div>Something went wrong</div>;

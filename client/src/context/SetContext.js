@@ -8,6 +8,8 @@ function reducer(state, action) {
   switch (action.type) {
     case "UPDATE_SET":
       return action.payload;
+    case "UPDATE_DECK":
+      return { ...state, ...action.payload };
     default:
       return true;
   }

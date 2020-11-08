@@ -11,7 +11,6 @@ const Card = ({ card, nextCard }) => {
   const update = (choice) => {
     card.update(choice);
     setShowFront(!showFront);
-    console.log(card);
     nextCard();
   };
   return (
