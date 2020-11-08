@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Spinner from "react-spinkit";
 import styled from "styled-components";
+import { createCards, Deck, statEn } from "../leitner";
 import Progress from "./Progress";
 import { Set } from "../context/SetContext";
 
@@ -67,7 +68,11 @@ const DeckViewerWrapper = () => {
 };
 
 const DeckViewer = ({ deck }) => {
-  const { id, setId, name, learned, New, starred, total } = deck;
+  const { id, setId, name } = deck;
+  const cards = new Deck({ cards: createCards(deck.cards) });
+  const learned = cards.countType(statEn.MASTERED);
+  const New = cards.countType(statEn.NEW);
+  const total = deck.cards.length;
   const history = useHistory();
   return (
     <div
@@ -84,14 +89,14 @@ const DeckViewer = ({ deck }) => {
         <div className="w-2/3 text-left ">
           <h1 className="font-semibold">{name ? name : "Deck+index"}</h1>
         </div>
-        <div className="w-1/3"></div>
+        <div className="w-1/2"></div>
       </div>
       <div
         className="grid items-center py-4 text-sm"
         style={{ minHeight: "150px" }}
       >
         <div className="flex">
-          <div className="w-1/3 flex-col">
+          <div className="w-1/2 flex-col">
             <span className="flex justify-center text-2xl  font-semibold">
               {learned ? learned : "-"}
             </span>
@@ -102,13 +107,6 @@ const DeckViewer = ({ deck }) => {
               {New ? New : "-"}
             </span>
             <span className="flex justify-center text-teal-600">New</span>
-          </div>
-
-          <div className="w-1/3 flex-col">
-            <span className="flex justify-center text-2xl font-semibold">
-              {starred ? starred : "-"}
-            </span>
-            <span className="flex justify-center text-gray-500">Starred</span>
           </div>
         </div>
       </div>

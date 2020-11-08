@@ -17,8 +17,10 @@ const Progress = ({ progress, done, total, context }) => {
   return (
     <>
       <div className="flex">
-        {progress && <ShowPercentage progress={progress} />}
-        {!progress && <ShowStats context={context} done={done} total={total} />}
+        {(progress === 0 || progress) && <ShowPercentage progress={progress} />}
+        {!progress && progress !== 0 && (
+          <ShowStats context={context} done={done} total={total} />
+        )}
       </div>
       <div className="flex">
         <Line
