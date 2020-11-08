@@ -13,9 +13,9 @@ const Cointainer = styled.div`
 
 const DeckComponent = () => {
   const location = useLocation();
-  const deck = location.state;
-
-  const d = new Deck({ cards: createCards(deck.cards) });
+  const data = location.state;
+  data.cards = createCards(data.cards);
+  const d = new Deck(data);
   const cardsRef = useRef(d);
   let cards = cardsRef.current;
 
@@ -36,7 +36,7 @@ const DeckComponent = () => {
     setCurrentCard(cards.pick());
   };
 
-  if (!deck) return <div>Something went wrong</div>;
+  if (!data) return <div>Something went wrong</div>;
 
   return (
     <Cointainer className="grid md:px-32 xl:px-64">

@@ -13,7 +13,12 @@ const Line = styled.div`
  */
 
 const Progress = ({ progress, done, total, context }) => {
-  const width = progress || Math.ceil((done / total) * 100);
+  const width = progress === 0 || progress || Math.ceil((done / total) * 100);
+  const mainLineClass =
+    " h-2 rounded  bg-green-400" + (width === 100 ? "" : "rounded-r-none");
+
+  const secLineClass =
+    " h-2 rounded  bg-green-100" + (width === 0 ? "" : "rounded-l-none");
   return (
     <>
       <div className="flex">
@@ -23,10 +28,7 @@ const Progress = ({ progress, done, total, context }) => {
         )}
       </div>
       <div className="flex">
-        <Line
-          width={width}
-          className=" h-2 rounded rounded-r-none bg-green-400"
-        />
+        <Line width={width} className={mainLineClass} />
         <Line
           width={100 - width}
           className=" h-2 rounded rounded-l-none bg-green-100"
