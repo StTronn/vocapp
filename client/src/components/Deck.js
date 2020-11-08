@@ -30,10 +30,12 @@ const DeckComponent = () => {
 
   const nextCard = () => {
     deck = deckRef.current;
-    dispatch({ type: "UPDATE_DECK", payload: {[deck.id]:deck} });
     setLearned(deck.countType(statEn.MASTERED));
     setNew(deck.countType(statEn.NEW));
     setCurrentCard(deck.pick());
+
+    const deckCopy = JSON.parse(JSON.stringify(deck));
+    dispatch({ type: "UPDATE_DECK", payload: { [deck.id]: deckCopy } });
   };
 
   if (!data) return <div>Something went wrong</div>;

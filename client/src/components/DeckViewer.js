@@ -14,7 +14,7 @@ const Cointainer = styled.div`
 
 // fetch decks list for current set
 const decks = {
-  "1": {
+  1: {
     setId: 1,
     id: "1",
     name: "Common 1",
@@ -26,17 +26,15 @@ const decks = {
       {
         front: "Hello",
         back: "strict in lifestyle and nature",
-        status: "new",
       },
       {
         front: "etheral",
         back: "Delicate in touch, out of this world",
-        status: "new",
       },
     ],
   },
 
-  "2": {
+  2: {
     setId: 1,
     id: "2",
     name: "Common 2",
