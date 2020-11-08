@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import _ from "lodash";
 import { createCards, Deck, statEn } from "../leitner";
 import { useLocation } from "react-router-dom";
@@ -15,23 +15,27 @@ const DeckComponent = () => {
   const location = useLocation();
   const deck = location.state;
 
-  const d = new Deck(createCards(deck.cards));
+  const d = new Deck({ cards: createCards(deck.cards) });
   const cardsRef = useRef(d);
-  const cards = cardsRef.current;
+  let cards = cardsRef.current;
 
   //metadata
   const review = cards.countType(statEn.REVIEW) + cards.countType(statEn.WRONG);
-  const learned = cards.countType(statEn.MASTERED);
-  const New = cards.countType(statEn.NEW);
-  const total = cards.cards.length;
+  let [learned, setLearned] = useState(cards.countType(statEn.MASTERED));
+  let [New, setNew] = useState(cards.countType(statEn.NEW));
+  let [total, setTotal] = useState(cards.cards.length);
 
-  const [currentCard, setCurrentCard] = useState(cards.pick());
+  const [currentCard, setCurrentCard] = useState(cards.cards[0]);
 
   const nextCard = () => {
+    cards = cardsRef.current;
+    console.log(cards);
+    setLearned(cards.countType(statEn.MASTERED));
+    setNew(cards.countType(statEn.NEW));
+
     setCurrentCard(cards.pick());
   };
 
-  console.log(cards, New);
   if (!deck) return <div>Something went wrong</div>;
 
   return (
