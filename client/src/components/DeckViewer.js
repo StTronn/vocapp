@@ -12,10 +12,10 @@ const Cointainer = styled.div`
 `;
 
 // fetch decks list for current set
-const decks = [
-  {
+const decks = {
+  1: {
     setId: 1,
-    id: 1,
+    id: "1",
     name: "Common 1",
     learned: 20,
     New: 20,
@@ -25,14 +25,19 @@ const decks = [
       {
         front: "Hello",
         back: "strict in lifestyle and nature",
+        status: "new",
       },
-      { front: "etheral", back: "Delicate in touch, out of this world" },
+      {
+        front: "etheral",
+        back: "Delicate in touch, out of this world",
+        status: "new",
+      },
     ],
   },
 
-  {
+  2: {
     setId: 1,
-    id: 2,
+    id: "2",
     name: "Common 2",
     learned: 26,
     New: 26,
@@ -43,7 +48,7 @@ const decks = [
       { front: "etheral", back: "Delicate in touch, out of this world" },
     ],
   },
-];
+};
 
 const DeckViewerWrapper = () => {
   const { state, dispatch } = useContext(Set);
@@ -54,7 +59,7 @@ const DeckViewerWrapper = () => {
   if (!state) return <Spinner name="folding-cube" color="teal" />;
   return (
     <Cointainer className="grid-cols-1 lg:grid-cols-4">
-      {state.map((e) => (
+      {Object.values(state).map((e) => (
         <DeckViewer deck={e} key={e.id} />
       ))}
     </Cointainer>

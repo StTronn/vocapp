@@ -19,10 +19,12 @@ const DeckComponent = () => {
   const cardsRef = useRef(d);
   const cards = cardsRef.current;
 
+  //metadata
+  const review = cards.countType(statEn.REVIEW) + cards.countType(statEn.WRONG);
   const learned = cards.countType(statEn.MASTERED);
   const New = cards.countType(statEn.NEW);
-  const review = cards.countType(statEn.REVIEW) + cards.countType(statEn.WRONG);
   const total = cards.cards.length;
+
   const [currentCard, setCurrentCard] = useState(cards.pick());
 
   const nextCard = () => {
