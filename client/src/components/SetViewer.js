@@ -38,7 +38,7 @@ const SetViewer = ({ set }) => {
   return (
     <div
       onClick={() => {
-        history.push(`/set/id=${id}`);
+        history.push(`/set?id=${id}`);
       }}
       className="bg-white cursor-pointer rounded  p-4 shadow"
     >

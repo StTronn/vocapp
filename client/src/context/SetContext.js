@@ -9,7 +9,8 @@ function reducer(state, action) {
     case "UPDATE_SET":
       return action.payload;
     case "UPDATE_DECK":
-      return { ...state, ...action.payload };
+      const { setId, updatedDeck } = action.payload;
+      return { ...state, [setId]: { ...state[setId], ...updatedDeck } };
     default:
       return true;
   }

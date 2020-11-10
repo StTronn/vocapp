@@ -34,8 +34,12 @@ const DeckComponent = () => {
     setNew(deck.countType(statEn.NEW));
     setCurrentCard(deck.pick());
 
-    const deckCopy = JSON.parse(JSON.stringify(deck));
-    dispatch({ type: "UPDATE_DECK", payload: { [deck.id]: deckCopy } });
+    const updatedDeck = JSON.parse(JSON.stringify(deck));
+    console.log(updatedDeck);
+    dispatch({
+      type: "UPDATE_DECK",
+      payload: { setId: deck.setId, updatedDeck: { [deck.id]: updatedDeck } },
+    });
   };
 
   if (!data) return <div>Something went wrong</div>;
