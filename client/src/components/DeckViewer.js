@@ -58,15 +58,23 @@ const DeckViewerWrapper = () => {
   const location = useLocation();
   const { id: setId } = queryString.parse(location.search);
   const { state, dispatch } = useContext(Set);
+
   useEffect(() => {
-    dispatch({ type: "UPDATE_SET", payload: { [setId]: decks } });
+    //fetch from server if dirty:false or empty
+    //else pick up from localstoraage
+    const cache = JSON.parse(localStorage.getItem("sets")) || false;
+    const updated = JSON.parse(localStorage.getItem("updated")) || false;
+    if (!cache || !updated)
+      dispatch({ type: "UPDATE_SET", payload: { [setId]: decks } });
+    else dispatch({ type: "UPDATE_SET", payload: cache });
   }, []);
 
   if (!state) return <Spinner name="folding-cube" color="teal" />;
+  console.log("setState", state);
   return (
     <Cointainer className="grid-cols-1 lg:grid-cols-4">
       {Object.values(state[setId]).map((e) => (
-        <DeckViewer deck={e} key={e.id} />
+        <DeckViewer deck={JSON.parse(JSON.stringify(e))} key={e.id} />
       ))}
     </Cointainer>
   );
