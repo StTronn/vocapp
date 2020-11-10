@@ -1,4 +1,11 @@
 import React, { useState } from "react";
+import styled from "styled-components";
+import Status from "./Status";
+
+const Cointainer = styled.div`
+  display: grid;
+  grid-template-rows: auto 1fr;
+`;
 
 /*
  * props ->
@@ -6,7 +13,7 @@ import React, { useState } from "react";
  * back
  */
 const Card = ({ card, nextCard }) => {
-  const { front, back } = card;
+  const { front, back, status } = card;
   const [showFront, setShowFront] = useState(true);
   const update = (choice) => {
     card.update(choice);
@@ -16,14 +23,15 @@ const Card = ({ card, nextCard }) => {
   return (
     <>
       <div className=" bg-white rounded   shadow">
-        <div
+        <Cointainer
           className="grid items-center p-4  text-sm"
           style={{ minHeight: "250px" }}
         >
+          <Status type={status} />
           <h1 className=" justify-center text-gray-800 text-center text-4xl font-semibold">
             {showFront ? (front ? front : "-") : back ? back : "-"}
           </h1>
-        </div>
+        </Cointainer>
         {showFront && (
           <FrontButton setShowFront={setShowFront} showFront={showFront} />
         )}
