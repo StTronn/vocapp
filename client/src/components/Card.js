@@ -13,7 +13,11 @@ const Cointainer = styled.div`
  * back
  */
 const Card = ({ card, nextCard }) => {
-  const { front, back, status } = card;
+  let { front, back, status } = card;
+  //temp
+  if (!front && card.word) front = card.word;
+  if (!back && card.definition) back = card.definition;
+  //end temp
   const [showFront, setShowFront] = useState(true);
   const update = (choice) => {
     card.update(choice);

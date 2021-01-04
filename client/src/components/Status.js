@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { statEn } from "../leitner";
+import { statEn } from "lt-spaced-repetition-js";
 
 const Status = ({ type }) => {
   let color = getColor(type);

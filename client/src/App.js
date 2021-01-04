@@ -2,7 +2,6 @@ import React from "react";
 import SetViewerWrapper from "./components/SetViewer";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import DeckViewerWrapper from "./components/DeckViewer";
-import Card from "./components/Card";
 import Deck from "./components/Deck";
 import "./App.css";
 
@@ -60,7 +59,7 @@ function App() {
             <Deck />
           </Route>
           <Route exact path="/">
-            <Card />
+            <SetViewerWrapper sets={data} />
           </Route>
         </Switch>
       </div>

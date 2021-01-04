@@ -2,10 +2,11 @@ import React, { useContext, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import Spinner from "react-spinkit";
 import styled from "styled-components";
-import { createCards, Deck, statEn } from "../leitner";
+import { createCards, Deck, statEn } from "lt-spaced-repetition-js";
 import Progress from "./Progress";
 import queryString from "query-string";
 import { Set } from "../context/SetContext";
+import cardsJson from "../data.json";
 
 const Cointainer = styled.div`
   display: grid;
@@ -19,20 +20,7 @@ const decks = {
     setId: "1",
     id: "1",
     name: "Common 1",
-    learned: 20,
-    New: 20,
-    total: 52,
-    starred: 0,
-    cards: [
-      {
-        front: "Hello",
-        back: "strict in lifestyle and nature",
-      },
-      {
-        front: "etheral",
-        back: "Delicate in touch, out of this world",
-      },
-    ],
+    cards: cardsJson,
   },
 
   2: {
@@ -50,10 +38,6 @@ const decks = {
   },
 };
 
-const sets = {
-  1: decks,
-};
-
 const DeckViewerWrapper = () => {
   const location = useLocation();
   const { id: setId } = queryString.parse(location.search);
@@ -62,15 +46,13 @@ const DeckViewerWrapper = () => {
   useEffect(() => {
     //fetch from server if dirty:false or empty
     //else pick up from localstoraage
+    //const updated = JSON.parse(localStorage.getItem("updated")) || false;
     const cache = JSON.parse(localStorage.getItem("sets")) || false;
-    const updated = JSON.parse(localStorage.getItem("updated")) || false;
-    if (!cache || !updated)
-      dispatch({ type: "UPDATE_SET", payload: { [setId]: decks } });
+    if (!cache) dispatch({ type: "UPDATE_SET", payload: { [setId]: decks } });
     else dispatch({ type: "UPDATE_SET", payload: cache });
-  }, []);
+  }, [dispatch, setId]);
 
   if (!state) return <Spinner name="folding-cube" color="teal" />;
-  console.log("setState", state);
   return (
     <Cointainer className="grid-cols-1 lg:grid-cols-4">
       {Object.values(state[setId]).map((e) => (

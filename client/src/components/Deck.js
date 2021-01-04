@@ -1,7 +1,7 @@
 import React, { useState, useRef, useContext } from "react";
 import { Set } from "../context/SetContext";
 import _ from "lodash";
-import { createCards, Deck, statEn } from "../leitner";
+import { createCards, Deck, statEn } from "lt-spaced-repetition-js";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Progress from "./Progress";
