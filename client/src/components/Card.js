@@ -1,9 +1,32 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import Status from "./Status";
 
+const rotate = keyframes`
+  from {
+
+    backface-visibility: hidden;
+    color:white;
+    transform: rotateX(180deg);
+  }
+  56% {color:black;backface-visibility:visible}
+
+  to {
+
+    transform: rotateX(0deg);
+  }
+`;
+
+const Perspective = styled.div`
+  perspective: 1000px;
+`;
+
 const Cointainer = styled.div`
-  display: grid;
+  animation: ${rotate} 0.3s ease-out;
+  transform-style: preserve-3d;
+`;
+
+const Display = styled.div`
   grid-template-rows: auto 1fr;
 `;
 
@@ -25,9 +48,9 @@ const Card = ({ card, nextCard }) => {
     nextCard();
   };
   return (
-    <>
-      <div className=" bg-white rounded   shadow">
-        <Cointainer
+    <Perspective>
+      <Cointainer key={showFront} className=" bg-white rounded shadow">
+        <Display
           className="grid items-center p-4  text-sm"
           style={{ minHeight: "250px" }}
         >
@@ -35,7 +58,7 @@ const Card = ({ card, nextCard }) => {
           <h1 className=" justify-center text-gray-800 text-center text-4xl font-semibold">
             {showFront ? (front ? front : "-") : back ? back : "-"}
           </h1>
-        </Cointainer>
+        </Display>
         {showFront && (
           <FrontButton setShowFront={setShowFront} showFront={showFront} />
         )}
@@ -47,10 +70,14 @@ const Card = ({ card, nextCard }) => {
             showFront={showFront}
           />
         )}
-      </div>
-    </>
+      </Cointainer>
+    </Perspective>
   );
 };
+
+const FrontCointainer = styled.div`
+  animation: ${rotate} 0.4s linear;
+`;
 
 const FrontButton = ({ showFront, setShowFront }) => (
   <div
