@@ -7,6 +7,7 @@ import Progress from "./Progress";
 import queryString from "query-string";
 import { Set } from "../context/SetContext";
 import cardsJson from "../data.json";
+import cards from "../cards.json";
 
 const Cointainer = styled.div`
   display: grid;
@@ -14,33 +15,16 @@ const Cointainer = styled.div`
   column-gap: 20px;
 `;
 
-// fetch decks list for current set
-const decks = {
-  1: {
-    setId: "1",
-    id: "1",
-    name: "Common 1",
-    cards: cardsJson,
-  },
+const decks = {};
+for (let i = 0; i < cards.length; i++) {
+  decks[i] = { setId: "1", id: `${i}`, name: `Deck ${i + 1}`, cards: cards[i] };
+}
 
-  2: {
-    setId: "1",
-    id: "2",
-    name: "Common 2",
-    learned: 26,
-    New: 26,
-    total: 52,
-    starred: 0,
-    cards: [
-      { front: "stren", back: "strict in lifestyle and nature" },
-      { front: "etheral", back: "Delicate in touch, out of this world" },
-    ],
-  },
-};
+// fetch decks list for current set
 
 const DeckViewerWrapper = () => {
-  const location = useLocation();
-  const { id: setId } = queryString.parse(location.search);
+  //proto
+  const setId = 1;
   const { state, dispatch } = useContext(Set);
 
   useEffect(() => {
@@ -54,7 +38,7 @@ const DeckViewerWrapper = () => {
 
   if (!state) return <Spinner name="folding-cube" color="teal" />;
   return (
-    <Cointainer className="grid-cols-1 lg:grid-cols-4">
+    <Cointainer className="grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
       {Object.values(state[setId]).map((e) => (
         <DeckViewer deck={JSON.parse(JSON.stringify(e))} key={e.id} />
       ))}
@@ -79,7 +63,7 @@ const DeckViewer = ({ deck }) => {
           state: deck,
         });
       }}
-      className="bg-white cursor-pointer rounded  p-4 shadow"
+      className="bg-white cursor-pointer rounded p-8 md:p-4  shadow"
     >
       <div className="flex">
         <div className="w-2/3 text-left ">
@@ -92,17 +76,31 @@ const DeckViewer = ({ deck }) => {
         style={{ minHeight: "150px" }}
       >
         <div className="flex">
-          <div className="w-1/2 flex-col">
-            <span className="flex justify-center text-2xl  font-semibold">
-              {learned ? learned : "-"}
-            </span>
-            <span className="flex justify-center text-blue-600">Learned</span>
-          </div>
           <div className="w-1/3 flex-col">
-            <span className="flex justify-center text-2xl font-semibold">
-              {New ? New : "-"}
+            <span className="flex justify-center text-base  font-semibold">
+              {learned ? learned : "0"}
             </span>
-            <span className="flex justify-center text-teal-600">New</span>
+            <span className="flex justify-center text-sm text-blue-500">
+              mastered
+            </span>
+          </div>
+
+          <div className="w-1/3 flex-col">
+            <span className="flex justify-center text-base  font-semibold">
+              {total - learned - New ? total - learned - New : "0"}
+            </span>
+            <span className="flex justify-center text-sm text-orange-500">
+              learning
+            </span>
+          </div>
+
+          <div className="w-1/3 flex-col">
+            <span className="flex justify-center text-base font-semibold">
+              {New ? New : "0"}
+            </span>
+            <span className="flex justify-center text-sm text-teal-500">
+              new
+            </span>
           </div>
         </div>
       </div>

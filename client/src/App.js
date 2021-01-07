@@ -48,12 +48,12 @@ const data = [
 function App() {
   return (
     <>
-      <Nav />
       <Router>
+        <Nav />
         <div className=" mx-4  lg:mx-16">
           <Switch>
             <Route path="/setviewer">
-              <SetViewerWrapper sets={data} />
+              <DeckViewerWrapper />
             </Route>
             <Route path="/set">
               <DeckViewerWrapper />
@@ -62,7 +62,7 @@ function App() {
               <Deck />
             </Route>
             <Route exact path="/">
-              <SetViewerWrapper sets={data} />
+              <DeckViewerWrapper />
             </Route>
           </Switch>
         </div>
