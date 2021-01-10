@@ -1,5 +1,5 @@
-import React from "react";
-import SetViewerWrapper from "./components/SetViewer";
+import React, { useRef } from "react";
+import DeckDropDown from "./components/DeckDropDown";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import DeckViewerWrapper from "./components/DeckViewer";
 import Deck from "./components/Deck";
@@ -46,9 +46,11 @@ const data = [
 ];
 
 function App() {
+  const deckRef = useRef();
   return (
     <>
       <Router>
+        <DeckDropDown deckRef={deckRef} />
         <Nav />
         <div className=" mx-4  lg:mx-16">
           <Switch>
@@ -59,7 +61,7 @@ function App() {
               <DeckViewerWrapper />
             </Route>
             <Route exact path="/deck">
-              <Deck />
+              <Deck ref={deckRef} />
             </Route>
             <Route exact path="/">
               <DeckViewerWrapper />

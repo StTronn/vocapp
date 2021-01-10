@@ -2,7 +2,7 @@ import React, { useReducer, createContext } from "react";
 
 export const Set = createContext();
 
-const initialState = false;
+const initialState = JSON.parse(localStorage.getItem("sets")) || false;
 
 function reducer(state, action) {
   switch (action.type) {

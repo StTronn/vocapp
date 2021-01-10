@@ -9,7 +9,6 @@ const rotate = keyframes`
     color:white;
     transform: rotateX(180deg);
   }
-  56% {color:black;backface-visibility:visible}
 
   to {
 
@@ -22,7 +21,7 @@ const Perspective = styled.div`
 `;
 
 const Cointainer = styled.div`
-  animation: ${rotate} 0.3s ease-out;
+  animation: ${rotate} 0.4s ease-out;
   transform-style: preserve-3d;
 `;
 
@@ -54,10 +53,27 @@ const Card = ({ card, nextCard }) => {
           className="grid items-center p-4  text-sm"
           style={{ minHeight: "250px" }}
         >
-          <Status type={status} />
-          <h1 className=" justify-center text-gray-800 text-center text-4xl font-semibold">
-            {showFront ? (front ? front : "-") : back ? back : "-"}
-          </h1>
+          {showFront && (
+            <>
+              <Status type={status} />
+              <h1 className="  justify-center text-gray-800 text-center text-2xl md:text-4xl font-semibold">
+                {showFront ? (front ? front : "-") : back ? back : "-"}
+              </h1>
+            </>
+          )}
+          {!showFront && (
+            <>
+              <div className="grid">
+                <Status type={status} />
+                <div className="justify-self-center w-auto justify-center text-gray-800 text-center text-2xl md:text-4xl font-semibold">
+                  {front}
+                </div>
+              </div>
+              <p className=" justify-center text-gray-800 text-center text-xl ">
+                {back}
+              </p>
+            </>
+          )}
         </Display>
         {showFront && (
           <FrontButton setShowFront={setShowFront} showFront={showFront} />

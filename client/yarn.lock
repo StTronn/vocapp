@@ -6843,10 +6843,10 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
-lt-spaced-repetition-js@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/lt-spaced-repetition-js/-/lt-spaced-repetition-js-2.0.1.tgz#77c4f1ebfc24a3c1c3542a5fbcc251111204473e"
-  integrity sha512-0lu+GRT9tT7VGJOd6z5hNIR5yhJ72am8z2vp9keFZ+OWj6ooIAdtr9BLSX+jAXwfpH2NH6jeoXoilst7VboWFw==
+lt-spaced-repetition-js@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/lt-spaced-repetition-js/-/lt-spaced-repetition-js-2.0.2.tgz#4e9b4d4ca1b423c684d550c12aade6151c660523"
+  integrity sha512-u9A9vHCfw2WwfIaY6X0vd8Oi1Ct3lXLAQGAPMcbELPSNQ7zf/wwgUTRWPG8HSeKyfGOeJfmeD8QCJDMqsXTVjw==
   dependencies:
     lodash "^4.17.20"
 

@@ -4,7 +4,6 @@ import Spinner from "react-spinkit";
 import styled from "styled-components";
 import { createCards, Deck, statEn } from "lt-spaced-repetition-js";
 import Progress from "./Progress";
-import queryString from "query-string";
 import { Set } from "../context/SetContext";
 import cardsJson from "../data.json";
 import cards from "../cards.json";
@@ -28,11 +27,9 @@ const DeckViewerWrapper = () => {
   const { state, dispatch } = useContext(Set);
 
   useEffect(() => {
-    //fetch from server if dirty:false or empty
-    //else pick up from localstoraage
-    //const updated = JSON.parse(localStorage.getItem("updated")) || false;
     const cache = JSON.parse(localStorage.getItem("sets")) || false;
-    if (!cache) dispatch({ type: "UPDATE_SET", payload: { [setId]: decks } });
+    if (!cache || Object.keys(cache[setId]).length !== cards.length)
+      dispatch({ type: "UPDATE_SET", payload: { [setId]: decks } });
     else dispatch({ type: "UPDATE_SET", payload: cache });
   }, [dispatch, setId]);
 
