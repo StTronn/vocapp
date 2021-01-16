@@ -4,11 +4,9 @@ import Status from "./Status";
 
 const rotate = keyframes`
   from {
-
-    backface-visibility: hidden;
-    color:white;
     transform: rotateX(180deg);
   }
+
 
   to {
 
@@ -16,12 +14,26 @@ const rotate = keyframes`
   }
 `;
 
+const hide = keyframes`
+  from {
+  opacity:0.0;
+  }
+  50%{opacity:0.0;}
+  to{
+  opacity:1.0;
+  }
+`;
+
+const InnerCointainer = styled.div`
+  animation: ${hide} 0.32s ease-in-out;
+`;
+
 const Perspective = styled.div`
-  perspective: 1000px;
+  perspective: 3900px;
 `;
 
 const Cointainer = styled.div`
-  animation: ${rotate} 0.4s ease-out;
+  animation: ${rotate} 0.32s ease-in-out;
   transform-style: preserve-3d;
 `;
 
@@ -34,7 +46,7 @@ const Display = styled.div`
  * front
  * back
  */
-const Card = ({ card, nextCard }) => {
+const Card = ({ card, nextCard, onAnswer }) => {
   let { front, back, status } = card;
   //temp
   if (!front && card.word) front = card.word;
@@ -42,50 +54,52 @@ const Card = ({ card, nextCard }) => {
   //end temp
   const [showFront, setShowFront] = useState(true);
   const update = (choice) => {
-    card.update(choice);
+    onAnswer(choice);
     setShowFront(!showFront);
     nextCard();
   };
   return (
     <Perspective>
-      <Cointainer key={showFront} className=" bg-white rounded shadow">
-        <Display
-          className="grid items-center p-4  text-sm"
-          style={{ minHeight: "250px" }}
-        >
-          {showFront && (
-            <>
-              <Status type={status} />
-              <h1 className="  justify-center text-gray-800 text-center text-2xl md:text-4xl font-semibold">
-                {showFront ? (front ? front : "-") : back ? back : "-"}
-              </h1>
-            </>
-          )}
-          {!showFront && (
-            <>
-              <div className="grid">
+      <Cointainer key={showFront} className="bg-white rounded shadow">
+        <InnerCointainer>
+          <Display
+            className="grid items-center p-4 text-sm"
+            style={{ minHeight: "250px" }}
+          >
+            {showFront && (
+              <>
                 <Status type={status} />
-                <div className="justify-self-center w-auto justify-center text-gray-800 text-center text-2xl md:text-4xl font-semibold">
-                  {front}
+                <h1 className="  justify-center text-gray-800 text-center text-2xl md:text-4xl font-semibold">
+                  {showFront ? (front ? front : "-") : back ? back : "-"}
+                </h1>
+              </>
+            )}
+            {!showFront && (
+              <>
+                <div className="grid">
+                  <Status type={status} />
+                  <div className="justify-self-center w-auto justify-center text-gray-800 text-center text-2xl md:text-4xl font-semibold">
+                    {front}
+                  </div>
                 </div>
-              </div>
-              <p className=" justify-center text-gray-800 text-center text-xl ">
-                {back}
-              </p>
-            </>
+                <p className=" justify-center text-gray-800 text-center text-xl ">
+                  {back}
+                </p>
+              </>
+            )}
+          </Display>
+          {showFront && (
+            <FrontButton setShowFront={setShowFront} showFront={showFront} />
           )}
-        </Display>
-        {showFront && (
-          <FrontButton setShowFront={setShowFront} showFront={showFront} />
-        )}
 
-        {!showFront && (
-          <BackButton
-            update={update}
-            setShowFront={setShowFront}
-            showFront={showFront}
-          />
-        )}
+          {!showFront && (
+            <BackButton
+              update={update}
+              setShowFront={setShowFront}
+              showFront={showFront}
+            />
+          )}
+        </InnerCointainer>
       </Cointainer>
     </Perspective>
   );

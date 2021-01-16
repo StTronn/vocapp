@@ -9,6 +9,8 @@ const Relative = styled.div`
 	left: -50%;
 `;
 
+const MODES = { normal: "NORMAL", test: "TEST" };
+
 const DeckDropDown = ({ deckRef }) => {
 	const path = useLocation().pathname;
 	const [visible, setVisible] = useState(false);
@@ -52,20 +54,22 @@ const DeckDropDown = ({ deckRef }) => {
 							aria-labelledby="options-menu"
 						>
 							<div className="py-1">
-								<a
-									href="#"
-									className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-									role="menuitem"
+								<div
+									onClick={() => {
+										deckRef.current.toggleMode(MODES.normal);
+									}}
+									className="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
 								>
 									Normal
-								</a>
-								<a
-									href="#"
-									className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-									role="menuitem"
+								</div>
+								<div
+									onClick={() => {
+										deckRef.current.toggleMode(MODES.test);
+									}}
+									className="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
 								>
 									Test
-								</a>
+								</div>
 							</div>
 							<div className="py-1">
 								<div
@@ -73,7 +77,7 @@ const DeckDropDown = ({ deckRef }) => {
 										deckRef.current.resetDeck();
 										setVisible(false);
 									}}
-									className="block px-4 py-2 text-sm text-red-600 hover:bg-red-600 hover:text-white"
+									className="block cursor-pointer px-4 py-2 text-sm text-red-600 hover:bg-red-600 hover:text-white"
 									role="menuitem"
 								>
 									Reset
