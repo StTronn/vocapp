@@ -36,6 +36,8 @@ const TestDeck = ({ deckRef, updateDeck }) => {
     return (
       <>
         <Cointainer className="grid md:px-32 xl:px-64">
+          <Card card={currentCard} onAnswer={onAnswer} nextCard={nextCard} />
+
           <div>
             {" "}
             <Progress done={right} context="Right" total={total} />
@@ -50,8 +52,6 @@ const TestDeck = ({ deckRef, updateDeck }) => {
   else
     return (
       <Cointainer className="grid md:px-32 xl:px-64">
-        <Card card={currentCard} onAnswer={onAnswer} nextCard={nextCard} />
-
         <div>
           {" "}
           <Progress done={right} context="Right" total={total} />
