@@ -17,10 +17,13 @@ const TestDeck = ({ deckRef, updateDeck }) => {
   const [currentCard, setCurrentCard] = useState(pickRandom(deck.cards));
   const [right, setRight] = useState(0);
   const [wrong, setWrong] = useState(0);
+  const [endTest, setEndTest] = useState(false);
 
   const nextCard = () => {
     deck = deckRef.current;
-    setCurrentCard(deck.pickTest());
+    const newCard = deck.pickTest();
+    if (newCard) setCurrentCard(newCard);
+    else setEndTest(true);
     updateDeck(deck);
   };
 
@@ -28,9 +31,24 @@ const TestDeck = ({ deckRef, updateDeck }) => {
     if (choice) setRight(right + 1);
     else setWrong(wrong + 1);
   };
+  console.log(deck);
+  if (!endTest)
+    return (
+      <>
+        <Cointainer className="grid md:px-32 xl:px-64">
+          <div>
+            {" "}
+            <Progress done={right} context="Right" total={total} />
+          </div>
 
-  return (
-    <>
+          <div>
+            <Progress done={right + wrong} context="Progress" total={total} />
+          </div>
+        </Cointainer>
+      </>
+    );
+  else
+    return (
       <Cointainer className="grid md:px-32 xl:px-64">
         <Card card={currentCard} onAnswer={onAnswer} nextCard={nextCard} />
 
@@ -39,13 +57,11 @@ const TestDeck = ({ deckRef, updateDeck }) => {
           <Progress done={right} context="Right" total={total} />
         </div>
 
-        {/* <div>
+        <div>
           <Progress done={right + wrong} context="Progress" total={total} />
         </div>
-        */}
       </Cointainer>
-    </>
-  );
+    );
 };
 
 export default TestDeck;

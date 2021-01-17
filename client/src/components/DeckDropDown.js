@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
+import { Mode } from "../context/DeckModeContext";
+import { MODES } from "../utils/";
 
 const Absolute = styled.div`
 	left: 50%;
@@ -9,9 +11,8 @@ const Relative = styled.div`
 	left: -50%;
 `;
 
-const MODES = { normal: "NORMAL", test: "TEST" };
-
 const DeckDropDown = ({ deckRef }) => {
+	const { state, dispatch } = useContext(Mode);
 	const path = useLocation().pathname;
 	const [visible, setVisible] = useState(false);
 	if (path === "/deck")
@@ -29,7 +30,7 @@ const DeckDropDown = ({ deckRef }) => {
 							aria-haspopup="true"
 							aria-expanded="true"
 						>
-							Options
+							{state}
 							{/* Heroicon name: chevron-down */}
 							<svg
 								className="-mr-1 ml-2 h-5 w-5"
@@ -56,7 +57,11 @@ const DeckDropDown = ({ deckRef }) => {
 							<div className="py-1">
 								<div
 									onClick={() => {
-										deckRef.current.toggleMode(MODES.normal);
+										dispatch({
+											type: "CHANGE_MODE",
+											payload: MODES.normal,
+										});
+										setVisible(false);
 									}}
 									className="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
 								>
@@ -64,7 +69,11 @@ const DeckDropDown = ({ deckRef }) => {
 								</div>
 								<div
 									onClick={() => {
-										deckRef.current.toggleMode(MODES.test);
+										dispatch({
+											type: "CHANGE_MODE",
+											payload: MODES.test,
+										});
+										setVisible(false);
 									}}
 									className="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
 								>

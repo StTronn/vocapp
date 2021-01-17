@@ -7,16 +7,16 @@ import React, {
   useEffect,
 } from "react";
 import { Set } from "../context/SetContext";
-import { createCards, Deck, statEn } from "lt-spaced-repetition-js";
+import { Mode } from "../context/DeckModeContext";
+import { createCards, Deck } from "lt-spaced-repetition-js";
 import queryString from "query-string";
 import { useLocation } from "react-router-dom";
 import NormalDeck from "./NormalDeck";
 import TestDeck from "./TestDeck";
-
-//modes
-export const MODES = { normal: "NORMAL", test: "TEST" };
+import { MODES } from "../utils/";
 
 const DeckComponent = forwardRef((props, ref) => {
+  const modeContext = useContext(Mode);
   const { state, dispatch } = useContext(Set);
   const location = useLocation();
   const { setId, id } = queryString.parse(location.search);
@@ -26,8 +26,9 @@ const DeckComponent = forwardRef((props, ref) => {
   const deckRef = useRef(d);
   let deck = deckRef.current;
   //metadata
-
-  const [mode, setMode] = useState(MODES.normal);
+  const mode = modeContext.state;
+  //use for re-rendering
+  const [reset, setReset] = useState(false);
 
   useEffect(() => {
     deck.resetTest();
@@ -47,15 +48,13 @@ const DeckComponent = forwardRef((props, ref) => {
       deck = deckRef.current;
       deck.reset();
       updateDeck(deck);
-    },
-    toggleMode(mode) {
-      setMode(mode);
+      setReset(!reset);
     },
   }));
 
   if (!data) return <div>Something went wrong</div>;
   if (mode === MODES.normal)
-    return <NormalDeck updateDeck={updateDeck} deckRef={deckRef} />;
+    return <NormalDeck key={reset} updateDeck={updateDeck} deckRef={deckRef} />;
   else return <TestDeck updateDeck={updateDeck} deckRef={deckRef} />;
 });
 
