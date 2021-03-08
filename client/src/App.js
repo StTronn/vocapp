@@ -1,9 +1,12 @@
 import React, { useRef } from "react";
-import DeckDropDown from "./components/DeckDropDown";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
+import DeckDropDown from "./components/DeckDropDown";
 import DeckViewerWrapper from "./components/DeckViewer";
 import Deck from "./components/Deck";
 import Nav from "./components/Nav";
+import Home from "./views/Home";
+
 import "./App.css";
 
 const data = [
@@ -50,10 +53,10 @@ function App() {
   return (
     <>
       <Router>
-        <DeckDropDown deckRef={deckRef} />
-        <Nav />
-        <div className=" mx-4  lg:mx-16">
-          <Switch>
+        <Switch>
+          <DeckDropDown deckRef={deckRef} />
+          <div className=" mx-4  lg:mx-16">
+            <Nav />
             <Route path="/setviewer">
               <DeckViewerWrapper />
             </Route>
@@ -63,11 +66,14 @@ function App() {
             <Route exact path="/deck">
               <Deck ref={deckRef} />
             </Route>
-            <Route exact path="/">
+            <Route exact path="/demo">
               <DeckViewerWrapper />
             </Route>
-          </Switch>
-        </div>
+          </div>
+        </Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
       </Router>
     </>
   );

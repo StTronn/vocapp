@@ -3,89 +3,43 @@ import styled, { keyframes } from "styled-components";
 
 import Status from "./Status";
 
-const rotate = keyframes`
-  from {
-    transform: rotateX(180deg);
-  }
-
-
-  to {
-
-    transform: rotateX(0deg);
-  }
-`;
-
-const hide = keyframes`
-  from {
-  opacity:0.0;
-  }
-  50%{opacity:0.0;}
-  to{
-  opacity:1.0;
-  }
-`;
-
-const InnerCointainer = styled.div`
-  animation: ${hide} 0.32s ease-in-out;
-`;
-
-const Perspective = styled.div`
-  perspective: 3900px;
-`;
-
-const Cointainer = styled.div`
-  animation: ${rotate} 0.32s ease-in-out;
-  transform-style: preserve-3d;
-  background: #A8DADC;
-/* HUD shadow */
-
-  box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.15), 0px 5px 17px rgba(0, 0, 0, 0.2);
-  border-radius: 18px;
-  width: 379px;
-  height: 300px;
-`;
-
-const Display = styled.div`
-  display:grid;
-  align-items:center;
-  min-height:250px;
-  grid-template-rows: auto 1fr;
-`;
-
 /*
  * props ->
  * front
  * back
  */
-const Card = ({ card, nextCard, onAnswer }) => {
+const Card = ({ card, handleAnswer, flip }) => {
   let { front, back, status } = card;
   //temp
   if (!front && card.word) front = card.word;
   if (!back && card.definition) back = card.definition;
   //end temp
+
   const [showFront, setShowFront] = useState(true);
+
   const update = (choice) => {
-    if (onAnswer)
-      onAnswer(choice);
-    setShowFront(!showFront);
-    if (nextCard)
-      nextCard();
+    if (handleAnswer)
+      handleAnswer(choice);
+    setShowFront(!showFront)
   };
+
   return (
     <Perspective>
-      <Cointainer key={showFront} className="bg-white rounded shadow">
+      <Cointainer key={showFront}>
         <InnerCointainer>
           <Display
-            className="grid items-center p-4 text-sm"
-            style={{ minHeight: "250px" }}
+            onClick={() => {flip && showFront && setShowFront(!showFront) }}
+            className="p-4 text-sm"
           >
             {showFront && (
-              <>
-                <Status type={status} />
-                <h1 className="  justify-center text-gray-800 text-center text-2xl md:text-4xl font-semibold">
+              <div  >
+                <StatusWrapper>
+                  <Status type={status} />
+                </StatusWrapper>
+                <h1 className="justify-center text-center pt-4 text-gray-800 font-bold text-h4">
                   {showFront ? (front ? front : "-") : back ? back : "-"}
                 </h1>
-              </>
+              </div>
             )}
             {!showFront && (
               <>
@@ -117,10 +71,6 @@ const Card = ({ card, nextCard, onAnswer }) => {
     </Perspective>
   );
 };
-
-const FrontCointainer = styled.div`
-  animation: ${rotate} 0.4s linear;
-`;
 
 const FrontButton = ({ showFront, setShowFront }) => (
   <div
@@ -154,4 +104,71 @@ const BackButton = ({ update, setShowFront, showFront }) => (
   </div>
 );
 
+const rotate = keyframes`
+  from {
+    transform: rotateX(180deg);
+  }
+
+
+  to {
+
+    transform: rotateX(0deg);
+  }
+`;
+
+const hide = keyframes`
+  from {
+  opacity:0.0;
+  }
+  50%{opacity:0.0;}
+  to{
+  opacity:1.0;
+  }
+`;
+
+const InnerCointainer = styled.div`
+  animation: ${hide} 0.32s ease-in-out;
+  width:100%;
+  height:100%;
+`;
+
+const Perspective = styled.div`
+  perspective: 3900px;
+`;
+
+const Cointainer = styled.div`
+  animation: ${rotate} 0.32s ease-in-out;
+  transform-style: preserve-3d;
+  background: #a8dadc;
+  /* HUD shadow */
+
+  box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.15), 0px 5px 17px rgba(0, 0, 0, 0.2);
+  border-radius: 18px;
+  width: 379px;
+  height: 300px;
+`;
+
+const Display = styled.div`
+  position:relative;
+  cursor: pointer;
+  width:100%;
+  height:100%;
+`;
+
+const FrontCointainer = styled.div`
+  animation: ${rotate} 0.4s linear;
+`;
+
+const StatusWrapper = styled.div`
+  position:absolute;
+  bottom:10px;
+  right: 10px;
+`
+
+Card.defualtProps = {
+  card: {},
+  handleAnswer: () => { },
+  flip: true,
+
+}
 export default Card;
