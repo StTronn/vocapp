@@ -1,11 +1,23 @@
 import React from 'react';
-import Styles from "./styles";
+import { Cointainer, CardCointainer } from "./styles";
+import Card from "../../../components/CardUi";
 
-const {Cointainer} =Styles;
+const demoCard = {
+  front: "Abstract",
+  back: "Showing Important details",
+  status: "New",
+};
 
 const Section1 = () => {
   return (
-    <Cointainer>Return</Cointainer>
+    <Cointainer>
+      <h1 className="font-bold"> Yes and No</h1>
+      <CardCointainer>
+        <Card card={demoCard} flip={false} />
+        <Card card={demoCard} flip={false} />
+      </CardCointainer>
+      <h4> Just let us know can you recall the word and we will handle the rest</h4>
+    </Cointainer>
   )
 }
 

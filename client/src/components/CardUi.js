@@ -144,7 +144,7 @@ const Cointainer = styled.div`
 
   box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.15), 0px 5px 17px rgba(0, 0, 0, 0.2);
   border-radius: 18px;
-  width: 379px;
+  width: 400px;
   height: 300px;
 `;
 

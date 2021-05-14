@@ -23,7 +23,7 @@ const TopInfo = () => {
           <InfoCointainer>
             <div className="font-bold text-h1 black">Learn Words Like Never Before
             </div>
-            <Button text="Demo" />
+            <Button text="Comming Soon" />
           </InfoCointainer>
           <div style={{ position: "relative" }}>
             <Card card={demoCard} flip={false} />
