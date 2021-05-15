@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Progress from "./Progress";
-import { pickRandom } from "../utils";
-import Card from "./Card";
+import Progress from "../../../components/Progress";
+import { pickRandom } from "../../../utils";
+import Card from "../../../components/Card";
 
 const Cointainer = styled.div`
   display: grid;

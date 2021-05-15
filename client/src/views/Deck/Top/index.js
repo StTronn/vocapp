@@ -6,14 +6,14 @@ import React, {
   useImperativeHandle,
   useEffect,
 } from "react";
-import { Set } from "../context/SetContext";
-import { Mode } from "../context/DeckModeContext";
+import { Set } from "../../../context/SetContext";
+import { Mode } from "../../../context/DeckModeContext";
 import { createCards, Deck } from "lt-spaced-repetition-js";
 import queryString from "query-string";
 import { useLocation } from "react-router-dom";
 import NormalDeck from "./NormalDeck";
 import TestDeck from "./TestDeck";
-import { MODES } from "../utils/";
+import { MODES } from "../../../utils";
 
 const DeckComponent = forwardRef((props, ref) => {
   const modeContext = useContext(Mode);
