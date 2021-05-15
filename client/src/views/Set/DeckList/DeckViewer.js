@@ -1,51 +1,13 @@
-import React, { useContext, useEffect } from "react";
-import { useHistory, useLocation } from "react-router-dom";
-import Spinner from "react-spinkit";
-import styled from "styled-components";
+import React from "react";
+import { useHistory } from "react-router-dom";
 import { createCards, Deck, statEn } from "lt-spaced-repetition-js";
-import Progress from "./Progress";
-import { Set } from "../context/SetContext";
-import cardsJson from "../data.json";
-import cards from "../cards.json";
-
-const Cointainer = styled.div`
-  display: grid;
-  row-gap: 40px;
-  column-gap: 20px;
-`;
-
-const decks = {};
-for (let i = 0; i < cards.length; i++) {
-  decks[i] = { setId: "1", id: `${i}`, name: `Deck ${i + 1}`, cards: cards[i] };
-}
-
-// fetch decks list for current set
-
-const DeckViewerWrapper = () => {
-  //proto
-  const setId = 1;
-  const { state, dispatch } = useContext(Set);
-
-  useEffect(() => {
-    const cache = JSON.parse(localStorage.getItem("sets")) || false;
-    if (!cache || Object.keys(cache[setId]).length !== cards.length)
-      dispatch({ type: "UPDATE_SET", payload: { [setId]: decks } });
-    else dispatch({ type: "UPDATE_SET", payload: cache });
-  }, [dispatch, setId]);
-
-  if (!state) return <Spinner name="folding-cube" color="teal" />;
-  return (
-    <Cointainer className="grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
-      {Object.values(state[setId]).map((e) => (
-        <DeckViewer deck={JSON.parse(JSON.stringify(e))} key={e.id} />
-      ))}
-    </Cointainer>
-  );
-};
+import Progress from "../../../components/Progress";
 
 const DeckViewer = ({ deck }) => {
   const { id, setId, name } = deck;
+  //make the Deck Object
   const cards = new Deck({ cards: createCards(deck.cards) });
+  //calculate metadata
   const learned = cards.countType(statEn.MASTERED);
   const New = cards.countType(statEn.NEW);
   const total = deck.cards.length;
@@ -106,4 +68,4 @@ const DeckViewer = ({ deck }) => {
   );
 };
 
-export default DeckViewerWrapper;
+export default DeckViewer;
