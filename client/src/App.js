@@ -2,7 +2,8 @@ import React, { useRef } from "react";
 import DeckDropDown from "./components/DeckDropDown";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Set from "./views/Set";
-import Deck from "./views/Deck/Top";
+import Deck from "./views/Deck";
+import Home from "./views/Home";
 import Nav from "./components/Nav";
 import "./App.css";
 
@@ -64,7 +65,7 @@ function App() {
               <Deck ref={deckRef} />
             </Route>
             <Route exact path="/">
-              <Set />
+              <Home/>
             </Route>
           </Switch>
         </div>

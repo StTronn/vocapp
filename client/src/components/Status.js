@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { statEn } from "lt-spaced-repetition-js";
 
 const Status = ({ type, className }) => {
   let color = getColor(type);
   return (
     <div
-      className={` bg-${color}-500 text-base md:text-lg font-bold p-4 py-2 md:p-6 md:py-2  text-white shadow-sm rounded justify-self-end inline-block ${className}`}
+      className={` bg-${color}-500 text-sm md:text-lg font-bold px-4 py-1  text-white shadow-sm rounded-xl justify-self-end inline-block ${className}`}
     >
       {" "}
       {type}
@@ -29,3 +29,5 @@ const getColor = (type) => {
 };
 
 export default Status;
+
+
