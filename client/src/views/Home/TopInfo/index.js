@@ -3,7 +3,7 @@ import Card from "../CardUi";
 import style from "./styles";
 import Button from "../../../components/Button";
 
-const { TopContainer, InfoCointainer, Nav, TopCardWrapper, BannerInfo } = style;
+const { TopContainer, InfoCointainer, TopCardWrapper, BannerInfo } = style;
 
 const demoCard = {
   front: "Abstract",
@@ -16,9 +16,6 @@ const TopInfo = () => {
   return (
     <TopContainer>
       <div>
-        <Nav>
-          <Logo />
-        </Nav>
         <BannerInfo>
           <InfoCointainer>
             <div className="font-bold text-h1 black">Learn Words Like Never Before

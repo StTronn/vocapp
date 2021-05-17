@@ -53,7 +53,6 @@ function App() {
       <Router>
         <DeckDropDown deckRef={deckRef} />
         <Nav />
-        <div className=" mx-4  lg:mx-16">
           <Switch>
             <Route path="/setviewer">
               <Set />
@@ -68,7 +67,6 @@ function App() {
               <Home/>
             </Route>
           </Switch>
-        </div>
       </Router>
     </>
   );

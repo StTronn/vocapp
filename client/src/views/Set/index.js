@@ -3,12 +3,12 @@ import DeckList from "./DeckList";
 
 
 const Set = (params) => {
-  return(
-    <>
-      <DeckList/>
-    </>
+  return (
+    <div className=" mx-4  lg:mx-16">
+      <DeckList />
+    </div>
   )
-  
+
 }
 
 export default Set;
