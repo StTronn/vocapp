@@ -1,6 +1,6 @@
 import React from 'react';
 import { Cointainer, CardCointainer } from "./styles";
-import Card from "../../../components/CardUi";
+import Card from "../CardUi";
 
 const demoCard = {
   front: "Abstract",

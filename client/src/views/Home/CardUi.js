@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
 
-import Status from "./Status";
+import Status from "../../components/Status";
 
 /*
  * props ->

@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "../../../components/CardUi";
+import Card from "../CardUi";
 import style from "./styles";
 import Button from "../../../components/Button";
 

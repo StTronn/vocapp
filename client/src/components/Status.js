@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { statEn } from "lt-spaced-repetition-js";
 
 const Status = ({ type, className }) => {
