@@ -35,7 +35,7 @@ const TestDeck = ({ deckRef, updateDeck }) => {
   if (!endTest)
     return (
       <>
-        <Cointainer className="grid md:px-32 xl:px-64">
+        <Cointainer className="pt-20 grid md:px-32 xl:px-64">
           <Card card={currentCard} onAnswer={onAnswer} nextCard={nextCard} />
 
           <div>

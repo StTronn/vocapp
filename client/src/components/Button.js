@@ -4,6 +4,7 @@ import styled from "styled-components";
 const Cointainer = styled.div`
     width:fit-content;
     height:fit-content;
+    cursor: pointer;
 `
 
 const Button = ({text,onClick})=>{

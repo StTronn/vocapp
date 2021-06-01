@@ -1,7 +1,13 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
-import { createCards, Deck, statEn } from "lt-spaced-repetition-js";
-import Progress from "../../../components/Progress";
+import React from 'react';
+
+import {
+  createCards,
+  Deck,
+  statEn,
+} from 'lt-spaced-repetition-js';
+import { useHistory } from 'react-router-dom';
+
+import Progress from '../../../components/Progress';
 
 const DeckViewer = ({ deck }) => {
   const { id, setId, name } = deck;
@@ -13,6 +19,7 @@ const DeckViewer = ({ deck }) => {
   const total = deck.cards.length;
   const history = useHistory();
 
+
   return (
     <div
       onClick={() => {
@@ -22,13 +29,12 @@ const DeckViewer = ({ deck }) => {
           state: deck,
         });
       }}
-      className="bg-white cursor-pointer rounded p-8 md:p-4  shadow"
+      className="bg-white cursor-pointer rounded-lg p-8 md:p-4  shadow"
     >
       <div className="flex">
-        <div className="w-2/3 text-left ">
-          <h1 className="font-semibold">{name ? name : "Deck+index"}</h1>
+        <div className="w-full text-center ">
+          <div className="font-bold text-base">{name ? name : "Deck+index"}</div>
         </div>
-        <div className="w-1/2"></div>
       </div>
       <div
         className="grid items-center py-4 text-sm"

@@ -33,7 +33,7 @@ const DeckList = () => {
 
   if (!state) return <Spinner name="folding-cube" color="teal" />;
   return (
-    <Cointainer className="grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+    <Cointainer className="pt-20 grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
       {Object.values(state[setId]).map((e) => (
         <DeckViewer deck={JSON.parse(JSON.stringify(e))} key={e.id} />
       ))}

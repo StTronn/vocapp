@@ -25,7 +25,7 @@ const DeckDropDown = ({ deckRef }) => {
 							onClick={() => {
 								setVisible(!visible);
 							}}
-							className="inline-flex justify-center w-full rounded border border-gray-900 shadow-sm px-4 py-2 bg-gray-900 text-sm font-medium text-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
+							className="inline-flex items-center w-full rounded border border-gray-900 shadow-sm px-4 py-2 bg-gray-900 text-sm font-medium text-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
 							id="options-menu"
 							aria-haspopup="true"
 							aria-expanded="true"

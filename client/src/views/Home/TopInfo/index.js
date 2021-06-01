@@ -1,7 +1,10 @@
-import React from "react";
-import Card from "../CardUi";
-import style from "./styles";
-import Button from "../../../components/Button";
+import React from 'react';
+
+import { useHistory } from 'react-router-dom';
+
+import Button from '../../../components/Button';
+import Card from '../../../components/Card';
+import style from './styles';
 
 const { TopContainer, InfoCointainer, TopCardWrapper, BannerInfo } = style;
 
@@ -13,6 +16,8 @@ const demoCard = {
 
 
 const TopInfo = () => {
+  const history = useHistory();
+
   return (
     <TopContainer>
       <div>
@@ -20,12 +25,12 @@ const TopInfo = () => {
           <InfoCointainer>
             <div className="font-bold text-h1 black">Learn Words Like Never Before
             </div>
-            <Button text="Comming Soon" />
+            <Button text="Preview" onClick={()=>{history.push('/set')}} />
           </InfoCointainer>
-          <div style={{ position: "relative" }}>
-            <Card card={demoCard} flip={false} />
+          <div className="pointer-events-none" style={{ position: "relative" }}>
+            <Card card={demoCard}  />
             <TopCardWrapper>
-              <Card card={demoCard} flip={false} />
+              <Card card={demoCard} />
             </TopCardWrapper>
           </div>
         </BannerInfo>
@@ -33,21 +38,5 @@ const TopInfo = () => {
     </TopContainer>
   )
 }
-
-const Logo = () => (
-  <svg
-    width="47"
-    height="36"
-    viewBox="0 0 47 36"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M7.84395 32L23.5 7.44114L39.1561 32H7.84395Z"
-      stroke="#457B9D"
-      stroke-width="8"
-    />
-  </svg>
-);
 
 export default TopInfo;

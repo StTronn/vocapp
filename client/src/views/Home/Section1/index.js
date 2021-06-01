@@ -1,6 +1,10 @@
 import React from 'react';
-import { Cointainer, CardCointainer } from "./styles";
-import Card from "../CardUi";
+
+import Card from '../../../components/Card';
+import {
+  CardCointainer,
+  Cointainer,
+} from './styles';
 
 const demoCard = {
   front: "Abstract",
@@ -11,12 +15,15 @@ const demoCard = {
 const Section1 = () => {
   return (
     <Cointainer>
-      <h1 className="font-bold"> Yes and No</h1>
-      <CardCointainer>
-        <Card card={demoCard} flip={false} />
-        <Card card={demoCard} flip={false} />
+      <div className="font-bold text-4xl"> Yes and No</div>
+      <CardCointainer className="pointer-events-none">
+        <Card card={demoCard} fliped={true} />
+        <Card card={demoCard} fliped={false} />
       </CardCointainer>
-      <h4> Just let us know can you recall the word and we will handle the rest</h4>
+      <span className="text-lg font-semibold">
+        {" "}
+        Just let us know can you recall the word and we will handle the rest
+      </span>
     </Cointainer>
   )
 }

@@ -106,6 +106,13 @@ html {
   background: var(--mint);
 }
 
+.red {
+  color: var(--red);
+}
+
+.bg-red {
+  background: var(--red);
+}
 .black {
   color: #000;
 }
