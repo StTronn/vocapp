@@ -3,37 +3,36 @@ import { Link } from "react-router-dom";
 
 const Nav = () => {
 	return (
-		<nav className="bg-gray-800 mb-8 absolute w-full">
+		<nav style={{'background':'#1d3557'}} className="mb-8 font-bold absolute w-full">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="flex items-center justify-between h-16">
 					<div className="flex items-center">
 						<Link to="/">
 							<div className="flex-shrink-0">
-								<img
-									className="h-8 w-8"
-									src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-									alt="Workflow"
-								/>
+								<Logo/>
 							</div>
 						</Link>
-						<div className="hidden md:block">
-							<Link to="/">
-								<div className="ml-10 flex items-baseline space-x-4">
-									<span
-										className=" text-white px-3 py-2 rounded-md text-sm
-									font-medium"
-									>
-										{" "}
-										Home
-									</span>
-								</div>
-							</Link>
-						</div>
 					</div>
 				</div>
 			</div>
 		</nav>
 	);
 };
+
+const Logo = () => (
+  <svg
+    width="47"
+    height="36"
+    viewBox="0 0 47 36"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M7.84395 32L23.5 7.44114L39.1561 32H7.84395Z"
+      stroke="#457B9D"
+      stroke-width="8"
+    />
+  </svg>
+);
 
 export default Nav;

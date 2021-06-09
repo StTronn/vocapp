@@ -1,8 +1,10 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import Progress from "../../../components/Progress";
-import { pickRandom } from "../../../utils";
-import Card from "../../../components/Card";
+import React, { useState } from 'react';
+
+import styled from 'styled-components';
+
+import Card from '../../../components/Card';
+import Progress from '../../../components/Progress';
+import { pickRandom } from '../../../utils';
 
 const Cointainer = styled.div`
   display: grid;
@@ -35,7 +37,7 @@ const TestDeck = ({ deckRef, updateDeck }) => {
   if (!endTest)
     return (
       <>
-        <Cointainer className="grid md:px-32 xl:px-64">
+        <Cointainer className="pt-32 grid md:px-32 xl:px-64">
           <Card card={currentCard} onAnswer={onAnswer} nextCard={nextCard} />
 
           <div>

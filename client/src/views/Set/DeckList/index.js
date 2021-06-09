@@ -1,15 +1,23 @@
-import React, { useContext, useEffect } from "react";
-import Spinner from "react-spinkit";
-import styled from "styled-components";
-import { Set } from "../../../context/SetContext";
-import cards from "../../../cards.json";
-import DeckViewer from "./DeckViewer"
+import React, {
+  useContext,
+  useEffect,
+} from 'react';
 
+import Spinner from 'react-spinkit';
+import styled from 'styled-components';
+
+import cards from '../../../cards.json';
+import { Set } from '../../../context/SetContext';
+import DeckViewer from './DeckViewer';
 
 const Cointainer = styled.div`
   display: grid;
   row-gap: 40px;
   column-gap: 20px;
+  justify-content: space-between;
+  @media (min-width: 1200px){
+    grid-template-columns: repeat(3, 340px);
+  }
 `;
 
 const decks = {};
@@ -33,7 +41,7 @@ const DeckList = () => {
 
   if (!state) return <Spinner name="folding-cube" color="teal" />;
   return (
-    <Cointainer className="grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+    <Cointainer className="pt-20 grid-cols-1 md:grid-cols-3 lg:grid-cols-3">
       {Object.values(state[setId]).map((e) => (
         <DeckViewer deck={JSON.parse(JSON.stringify(e))} key={e.id} />
       ))}

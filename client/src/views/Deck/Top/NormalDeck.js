@@ -35,7 +35,7 @@ const NormalDeck = ({ deckRef, updateDeck }) => {
 
   return (
     <>
-      <Cointainer className="grid md:px-32 xl:px-64">
+      <Cointainer className="pt-32 grid md:px-32 xl:px-64">
         <Card card={currentCard} onAnswer={onAnswer} nextCard={nextCard} />
 
         <div>
