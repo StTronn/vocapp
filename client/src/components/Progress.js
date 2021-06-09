@@ -1,5 +1,6 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+
+import styled from 'styled-components';
 
 const Line = styled.div`
   width: ${(props) => props.width}%;
@@ -15,9 +16,9 @@ const Line = styled.div`
 const Progress = ({ progress, done, total, context }) => {
   const width = progress === 0 || progress || Math.ceil((done / total) * 100);
   const mainLineClass =
-    " h-2 rounded  bg-green-400 " + (width === 100 ? " " : "rounded-r-none");
+    " h-3 rounded-xl  bg-green-400 " + (width === 100 ? " " : "rounded-r-none");
   const secLineClass =
-    " h-2 rounded  bg-green-100 " + (width === 0 ? " " : "rounded-l-none");
+    " h-3 rounded-xl  bg-green-100 " + (width === 0 ? " " : "rounded-l-none");
   return (
     <>
       <div className="flex">

@@ -38,7 +38,7 @@ const DeckViewer = ({ deck }) => {
       </div>
       <div
         className="grid items-center py-4 text-sm"
-        style={{ minHeight: "150px" }}
+        style={{ minHeight: "190px" }}
       >
         <div className="flex">
           <div className="w-1/3 flex-col">
