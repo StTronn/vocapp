@@ -15,13 +15,13 @@ const demoCard = {
 const Section2 = () => {
   return (
     <Cointainer>
-      <h1 className="font-bold text-4xl"> Spaced Repetition</h1>
+      <div className="font-bold text-2xl md:text-4xl md:h-auto"> Spaced Repetition</div>
       <CardCointainer className="pointer-events-none">
-        <h5 className="text-lg font-semibold">
+        <div className=" lg:text-lg md:text-sm font-semibold">
           You learn better when the words come after some spaced time. Our
           algorithm test your long term memory and making your learning process
           easy
-        </h5>
+        </div>
         <Card card={demoCard} />
       </CardCointainer>
     </Cointainer>

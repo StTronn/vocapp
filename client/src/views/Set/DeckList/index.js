@@ -15,7 +15,7 @@ const Cointainer = styled.div`
   row-gap: 40px;
   column-gap: 20px;
   justify-content: space-between;
-  @media (min-width: 1200px){
+  @media (min-width: 1100px){
     grid-template-columns: repeat(3, 340px);
   }
 `;

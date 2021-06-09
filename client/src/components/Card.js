@@ -49,6 +49,11 @@ const Cointainer = styled.div`
   height: 370px;
   cursor: pointer;
   display:grid;
+  @media (max-width: 1200px){
+    width: 328px;
+    height: 300px;
+    max-height:fit-content;
+  }
 `;
 
 const Display = styled.div`
@@ -84,7 +89,7 @@ const Card = ({ card, nextCard, onAnswer,fliped=true }) => {
             {showFront && (
               <>
                 <Status type={status} />
-                <h1 className="text-h4 text-gray-800 text-center text-2xl md:text-4xl font-semibold">
+                <h1 className="text-xl md:text-2xl text-gray-800 text-center  font-semibold">
                   {showFront ? (front ? front : "-") : back ? back : "-"}
                 </h1>
               </>
@@ -94,9 +99,9 @@ const Card = ({ card, nextCard, onAnswer,fliped=true }) => {
                 <div className="grid">
 
                   <Status type={status} />
-                  <div className="text-h4 justify-self-center w-auto justify-center text-gray-800 text-center text-2xl md:text-4xl font-semibold">
+                  <div className="justify-self-center w-auto justify-center text-gray-800 text-center text-lg md:text-xl font-semibold">
                     {front}
-                    <p className="text-h5 pt-2 font-medium justify-center text-gray-700 text-center text-xl ">
+                    <p className="pt-2 font-medium justify-center text-gray-700 text-center text-lg md:text-xl ">
                       {back}
                     </p>
                   </div>
@@ -134,7 +139,7 @@ const FrontButton = ({ showFront, setShowFront }) => (
 );
 
 const BackButton = ({ update, setShowFront, showFront }) => (
-  <div className="grid cursor-pointer self-end mx-8  grid-cols-2  text-white text-center h-12">
+  <div className="grid cursor-pointer self-end md:mx-8  grid-cols-2  text-white text-center h-12">
     <div
       onClick={() => {
         update(1);

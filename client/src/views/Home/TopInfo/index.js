@@ -23,12 +23,15 @@ const TopInfo = () => {
       <div>
         <BannerInfo>
           <InfoCointainer>
-            <div className="font-bold text-h1 black">Learn Words Like Never Before
+            <span className="pt-2 md:pt-0">
+              <div className="font-bold text-3xl md:text-4xl pb-4" style={{color:"#125d98"}}>Vocapp</div>
+              <div className="font-bold text-3xl md:text-4xl black">Learn Words Like Never Before
             </div>
-            <Button text="Preview" onClick={()=>{history.push('/set')}} />
+            </span>
+            <Button text="Preview" onClick={() => { history.push('/set') }} />
           </InfoCointainer>
           <div className="pointer-events-none" style={{ position: "relative" }}>
-            <Card card={demoCard}  />
+            <Card card={demoCard} />
             <TopCardWrapper>
               <Card card={demoCard} />
             </TopCardWrapper>
