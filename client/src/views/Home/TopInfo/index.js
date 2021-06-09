@@ -30,7 +30,7 @@ const TopInfo = () => {
             </span>
             <Button text="Preview" onClick={() => { history.push('/set') }} />
           </InfoCointainer>
-          <div className="pointer-events-none" style={{ position: "relative" }}>
+          <div className="pointer-events-none" style={{ position: "relative",justifySelf:'center' }}>
             <Card card={demoCard} />
             <TopCardWrapper>
               <Card card={demoCard} />

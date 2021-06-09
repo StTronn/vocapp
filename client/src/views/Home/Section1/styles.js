@@ -10,6 +10,7 @@ export const Cointainer = styled.div`
   padding: 32px 80px;
   @media (max-width: 1100px){
     padding: 20px 15px;
+    justify-items: center;
   }
 `
 
