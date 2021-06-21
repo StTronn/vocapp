@@ -31,7 +31,7 @@ passport.use(
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
 
-      callbackURL: process.env.CALLBACK_URL,
+      callbackURL: '/auth/google/callback',
     },
     (accessToken, refreshToken, profile, done) => {
       console.log(profile);
@@ -54,12 +54,23 @@ passport.use(
   )
 );
 
+//check if the user has all the required info to 
+const completeInfo = (user) => {
+  if (!user.username && !user.team) return false;
+  return true;
+}
+
 const authenticate = async (req, res, next) => {
   try {
     const token = req.header("Authorization").replace("Bearer ", "");
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    if (!decoded)
+      return next({
+        statusCode: 401,
+        message: "invalid token",
+      });
+
     const user = await User.findById(decoded.id);
-    console.log(user.token, token);
     if (!user || user.token !== token) {
       return next({
         statusCode: 401,
@@ -67,15 +78,25 @@ const authenticate = async (req, res, next) => {
       });
     }
 
+    const { updatedUser } = req.body
+    if (!completeInfo(updatedUser || user)) {
+      return next({
+        statusCode: 403,
+        message: "Not enough details",
+      });
+    }
+
     // add user to req for next middleware/fn
     req.user = user;
     next();
   } catch (err) {
+    console.log(err);
     next({
-      statusCode: 403,
+      statusCode: 401,
       message: "You need to be logged in to to visit this route",
     });
   }
 };
 
 export default authenticate;
+

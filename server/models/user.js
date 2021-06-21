@@ -1,16 +1,20 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 import jwt from "jsonwebtoken";
+import _ from "lodash";
 import bcrypt from "bcrypt";
 
-const UserSchema = new mongoose.Schema({
+const UserSchema = new Schema({
   fullname: {
     type: String,
     required: [true, "Please enter your fullname"],
     trim: true,
   },
+  team: {
+    type: String,
+    default: 'other', //take enum web app other
+  },
   username: {
     type: String,
-    required: [true, "Please enter your username"],
     trim: true,
     unique: true,
   },
@@ -21,16 +25,27 @@ const UserSchema = new mongoose.Schema({
     lowercase: true,
     unique: true,
   },
+  role: {
+    type: String,
+    default: '',
+  },
+  info: {
+    type: String,
+    default: '',
+  },
+  rooms: {
+    type: [Schema.Types.ObjectId],
+  },
   token: {
     type: String,
     default: "",
   },
   password: {
     type: String,
-    minlength: [6, "Password should be atleast minimum of 6 characters"],
   },
   googleId: {
     type: String,
+    default: "nhp", //empty string may return true in edge cases
   },
   avatar: {
     type: String,
@@ -40,7 +55,7 @@ const UserSchema = new mongoose.Schema({
 });
 
 UserSchema.pre("save", async function (next) {
-  if (this.password) {
+  if (this.password && this.password.length < 18) {
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
   }
@@ -48,6 +63,7 @@ UserSchema.pre("save", async function (next) {
 });
 
 UserSchema.methods.getJwtToken = function () {
+  console.log(process.env.JWT_SECRET);
   this.token = jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRE,
   });
@@ -64,6 +80,14 @@ UserSchema.methods.getJwtToken = function () {
 };
 
 UserSchema.methods.checkPassword = async function (password) {
+  if (!password || !this.password) return false;
   return await bcrypt.compare(password, this.password);
 };
+
+UserSchema.methods.removeRoom = async function (id) {
+  this.rooms = _.remove(this.rooms, (room) => room.id == id);
+  await this.save();
+};
+
 export default mongoose.model("user", UserSchema);
+
