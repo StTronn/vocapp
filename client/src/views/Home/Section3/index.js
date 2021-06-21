@@ -27,8 +27,7 @@ const Section3 = () => {
         <span className="">
           <Status text="Test" color="var(--blueDark)" />
           <h5 className="md:text-sm lg:text-lg font-semibold py-4 text-center">
-            When starting out use the following mode to test and Identify your
-            weak spot
+            Feedback and identifying your weak points is very important. Test mode helps you with that.
           </h5>
           <img src={LearnImg} alt="test mode" width="482px" height="416px" />
         </span>

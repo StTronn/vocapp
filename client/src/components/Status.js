@@ -6,7 +6,7 @@ const Status = ({ type, className }) => {
   let color = getColor(type);
   return (
     <div
-      className={` bg-${color}-500 text-xs md:text-lg font-bold px-4 py-1 md:px-8 md:py-2  text-white shadow-sm rounded-full justify-self-end inline-block ${className}`}
+      className={` bg-${color}-500 text-xs md:text-base font-semibold px-4 py-1 md:px-8 md:py-2  text-white shadow-sm rounded-full justify-self-end inline-block ${className}`}
     >
       {" "}
       {type}
