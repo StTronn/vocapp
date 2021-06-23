@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Set from "./views/Set";
 import Deck from "./views/Deck";
 import Home from "./views/Home";
+import Login from "./views/Login";
+
 import Nav from "./components/Nav";
 import "./App.css";
 
@@ -59,6 +61,9 @@ function App() {
             </Route>
             <Route path="/set">
               <Set />
+            </Route>
+            <Route path="/login">
+              <Login />
             </Route>
             <Route exact path="/deck">
               <Deck ref={deckRef} />
